@@ -50,7 +50,7 @@ public class Main {
 
     public static void heroesAttack() {
         for (int i = 0; i < heroesDamage.length; i++) {
-            if (heroesHealth[i] > 0 && bossHealth > 0) {
+            if (heroesHealth[i] > 0 && bossHealth > 0 && heroesAttackType[i] != "Medic") {
                 int damage = heroesDamage[i];
                 if (heroesAttackType[i] == bossDefence) {
                     Random random = new Random();
@@ -69,22 +69,21 @@ public class Main {
 
     public static void medicHeal() {
 
-        int minHealth = 99;
-        int targetIndex = -1;
+            int minHealth = 99;
+            int targetIndex = -1;
 
-        for (int i = 0; i < heroesHealth.length; i++) {
-            if (heroesHealth[i] > 0 && heroesHealth[i] < minHealth) {
-                minHealth = heroesHealth[i];
-                targetIndex = i;
+            for (int i = 0; i < heroesHealth.length; i++) {
+                if (heroesHealth[i] > 0 && heroesHealth[i] < minHealth) {
+                    minHealth = heroesHealth[i];
+                    targetIndex = i;
+                }
+            }
+
+            if (targetIndex != -1 && heroesHealth[3] > 0) {
+                heroesHealth[targetIndex] += 50;
+                System.out.println("Medic healed " + heroesAttackType[targetIndex] + " for 50 health.");
             }
         }
-
-        if (targetIndex != -1) {
-            heroesHealth[targetIndex] += 50;
-            System.out.println("Medic healed " + heroesAttackType[targetIndex] + " for 50 health.");
-        }
-
-    }
 
     public static void showStatistics() {
         System.out.println("ROUND " + roundNumber + " --------------------");
